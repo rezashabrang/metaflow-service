@@ -38,7 +38,7 @@ jobs:
           run: |
             docker-compose -f docker-compose.development.yml build metadata
             docker tag rezashabrang/metaflow-metadata ghcr.io/rezashabrang/metaflow-metadata:latest
-            docker push ghcr.io/rezashabrang/metadata:latest
+            docker push ghcr.io/rezashabrang/metaflow-metadata:latest
 
         - name: build & push migration service
           run: |
