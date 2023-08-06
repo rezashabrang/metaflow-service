@@ -52,6 +52,7 @@ services:
     depends_on:
       - migration
   metadata:
+    image: rezashabrang/metaflow-metadata
     build:
       context: .
       dockerfile: Dockerfile.metadata_service
@@ -71,6 +72,7 @@ services:
     depends_on:
       - migration
   migration:
+    image: rezashabrang/metaflow-migration
     command: ["/opt/latest/bin/python3", "/root/run_goose.py"]
     build:
       context: .

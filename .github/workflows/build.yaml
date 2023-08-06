@@ -34,8 +34,20 @@ jobs:
             username: ${{ github.repository_owner }}
             password: ${{ secrets.GITHUB_TOKEN }}
 
-        - name: Build and push
+        - name: build & push metadata service
+          run: |
+            docker-compose -f docker-compose.development.yml build metadata
+            docker tag rezashabrang/metaflow-metadata ghcr.io/rezashabrang/metaflow-metadata:latest
+            docker push ghcr.io/rezashabrang/metadata:latest
+
+        - name: build & push migration service
+          run: |
+            docker-compose -f docker-compose.development.yml build migration
+            docker tag rezashabrang/metaflow-migration ghcr.io/rezashabrang/metaflow-migration:latest
+            docker push ghcr.io/rezashabrang/metaflow-migration:latest
+
+        - name: build & push ui-backend
           run: |
             docker-compose -f docker-compose.development.yml build ui_backend
-            docker tag rezashabrang/${{ env.IMAGE_NAME }} ghcr.io/rezashabrang/${{ env.IMAGE_NAME }}:latest
-            docker push ghcr.io/rezashabrang/${{ env.IMAGE_NAME }}:latest
+            docker tag rezashabrang/metaflow-ui-backend ghcr.io/rezashabrang/metaflow-ui-backend:latest
+            docker push ghcr.io/rezashabrang/metaflow-ui-backend:latest
